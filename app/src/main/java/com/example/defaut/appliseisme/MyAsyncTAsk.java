@@ -4,6 +4,10 @@ import android.os.AsyncTask;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,9 +26,16 @@ public class MyAsyncTAsk extends AsyncTask<Object,Void,String> {
     String chaine;
     String data;
     ArrayList Seisme;
+    JSONObject reader;
+    String coucou;
 
     @Override
     protected String doInBackground(Object[] params) {
+
+
+
+
+
         String chaine = (String)params[0];
         if(params[1] instanceof TextView) {
             tv = (TextView) params[1];
@@ -49,9 +60,36 @@ public class MyAsyncTAsk extends AsyncTask<Object,Void,String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // PARSAGE DU JSON //
 
-        return chaine2;
+        try {
+            reader = new JSONObject(chaine2);
+
+            JSONArray test = reader.getJSONArray("features");
+            for(int i =0 ; i<test.length(); i++) {
+
+                JSONObject test2 = test.getJSONObject(i);
+                coucou = "";
+                coucou += test2.getString("type");
+                return coucou;
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return "echec";
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onPostExecute(String s) {
