@@ -9,13 +9,15 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    TextView tv = (TextView) findViewById(R.id.textView);
+    TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv = (TextView) findViewById(R.id.textView);
         //new MyAsyncTAsk().execute("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson", tv);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,4 +40,5 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
